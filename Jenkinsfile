@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'any' // Tiempo de ejecución en cualquier agente disponible
-    }
+    agent any
 
     stages {
         stage('Build') {

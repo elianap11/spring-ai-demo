@@ -1,16 +1,14 @@
 pipeline {
     agent {
-    label 'windows' 
-}
-
+        label 'any' // Tiempo de ejecución en cualquier agente disponible
+    }
 
     stages {
         stage('Build') {
             steps {
                 script {
                     dir('backend') { // Navega a la carpeta 'backend'
-                        sh 'chmod +x mvnw' // Asegura que mvnw tenga permisos de ejecución
-                        sh './mvnw clean package' // Ejecuta mvnw para compilar el proyecto
+                        bat 'mvnw.cmd clean package' // Ejecuta mvnw para compilar el proyecto 
                     }
                 }
             }
@@ -19,7 +17,7 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a la carpeta 'backend'
-                        sh './mvnw test' // Ejecuta las pruebas
+                        bat 'mvnw.cmd test' // Ejecuta las pruebas
                     }
                 }
             }
@@ -28,8 +26,7 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a 'backend'
-                        // Asumiendo que tienes un jar generado en target/
-                        sh 'java -jar target/*.jar' // Ejecuta el jar para desplegar la app
+                        bat 'java -jar target/*.jar' // Ejecuta el jar generado
                     }
                 }
             }

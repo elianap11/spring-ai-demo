@@ -5,6 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    dir('backend') {
                     sh './mvnw clean package'
                 }
             }

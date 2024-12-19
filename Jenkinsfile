@@ -5,26 +5,29 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    dir('backend') {
-                    sh './mvnw clean package'
+                    dir('backend') { // Navega a la carpeta 'backend'
+                        sh './mvnw clean package' // Ejecuta mvnw dentro de 'backend'
+                    }
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    sh './mvnw test'
+                    dir('backend') { // Navega nuevamente a 'backend' para pruebas
+                        sh './mvnw test'  // Ejecuta las pruebas
+                    }
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    dir('backend') {
+                    dir('backend') { // Navega a 'backend' para desplegar
+                        // Agrega tus comandos de despliegue aquí
+                    }
                 }
             }
         }
     }
- } 
-}
 }

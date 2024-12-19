@@ -6,7 +6,8 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a la carpeta 'backend'
-                        bat 'mvnw.cmd clean package' // Ejecuta mvnw dentro de 'backend'
+                        sh 'chmod +x mvnw' // Asegura que mvnw tenga permisos de ejecución
+                        sh './mvnw clean package' // Ejecuta mvnw para compilar el proyecto
                     }
                 }
             }
@@ -14,8 +15,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    dir('backend') {
-                        bat 'mvnw.cmd test'
+                    dir('backend') { // Navega a la carpeta 'backend'
+                        sh './mvnw test' // Ejecuta las pruebas
                     }
                 }
             }
@@ -23,8 +24,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    dir('backend') { // Navega a 'backend' para desplegar
-
+                    dir('backend') { // Navega a 'backend'
+                        // Asumiendo que tienes un jar generado en target/
+                        sh 'java -jar target/*.jar' // Ejecuta el jar para desplegar la app
                     }
                 }
             }

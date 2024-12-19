@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a la carpeta 'backend'
-                        sh './mvnw clean package' // Ejecuta mvnw dentro de 'backend'
+                        bat 'mvnw.cmd clean package' // Ejecuta mvnw dentro de 'backend'
                     }
                 }
             }
@@ -14,8 +14,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    dir('backend') { // Navega nuevamente a 'backend' para pruebas
-                        sh './mvnw test'  // Ejecuta las pruebas
+                    dir('backend') {
+                        bat 'mvnw.cmd test'
                     }
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a 'backend' para desplegar
-                        // Agrega tus comandos de despliegue aquí
+
                     }
                 }
             }

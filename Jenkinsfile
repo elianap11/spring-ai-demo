@@ -5,8 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    dir('backend') { // Navega a la carpeta 'backend'
-                        sh './mvnw clean package' // Ejecuta mvnw para compilar el proyecto (usando sh en lugar de bat)
+                    dir('backend') {
+                        sh 'chmod +x mvnw'  // Agregar permisos de ejecución a mvnw
+                        sh './mvnw clean package'  // Ahora puedes ejecutar mvnw
                     }
                 }
             }
@@ -14,8 +15,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    dir('backend') { // Navega a la carpeta 'backend'
-                        sh './mvnw test' // Ejecuta las pruebas (usando sh)
+                    dir('backend') {
+                        sh './mvnw test'
                     }
                 }
             }
@@ -23,8 +24,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    dir('backend') { // Navega a 'backend'
-                        sh 'java -jar target/*.jar' // Ejecuta el jar generado (usando sh)
+                    dir('backend') {
+                        sh 'java -jar target/*.jar'
                     }
                 }
             }

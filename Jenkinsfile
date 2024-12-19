@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a la carpeta 'backend'
-                        bat 'mvnw.cmd clean package' // Ejecuta mvnw para compilar el proyecto 
+                        sh './mvnw clean package' // Ejecuta mvnw para compilar el proyecto (usando sh en lugar de bat)
                     }
                 }
             }
@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a la carpeta 'backend'
-                        bat 'mvnw.cmd test' // Ejecuta las pruebas
+                        sh './mvnw test' // Ejecuta las pruebas (usando sh)
                     }
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     dir('backend') { // Navega a 'backend'
-                        bat 'java -jar target/*.jar' // Ejecuta el jar generado
+                        sh 'java -jar target/*.jar' // Ejecuta el jar generado (usando sh)
                     }
                 }
             }
